@@ -15,7 +15,7 @@ Answer 2:
 
 Question 3:
 Alice wants to send m=15 to Bob. She gets Bob's public
-key pk=(19,77) by visiting a public repostory. If she
+key pk=(19,77) by visiting a public repository. If she
 decides to use RSA for encryption, what would the
 resulting cipher text be? (Show your calculation)
 
@@ -25,6 +25,9 @@ Answer 3:
 
 
 def main():
+    """
+    The main function, running the project
+    """
     print("Hello, world!")
 
 
