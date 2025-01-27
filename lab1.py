@@ -1,12 +1,12 @@
 """
 Question 1:
-What makes an asymmetric scheme like RSA slower than its
-symmetric alternatives such as AES? Explain. Also, what
-information in the RSA key generator, encryption and
+a) What makes an asymmetric scheme like RSA slower than its
+symmetric alternatives such as AES? Explain. 
+b) Also, what information in the RSA key generator, encryption and
 decryption algorithms an attacker may have access to?
 
 Answer 1:
-The Advanced Encryption Standard (AES) is faster than the
+a) The Advanced Encryption Standard (AES) is faster than the
 Rivest-Shamir-Adleman (RSA) algorithm, particularly when
 encrypting large amounts of data. This performance difference
 can be attributed to several factors, including algorithm
@@ -26,8 +26,9 @@ AES is implemented with computer in mind where every operation
 is a single cycle execution, while RSA is not computer optimized
 but as a matematical concept instead.
 
-
-
+b) The RSA algorithm shares the public key which enables encryption by others.
+An attacker can observe the encrypted text and use the public key to perform an analysis.
+RSA relies on well-known algorithms.
 
 Question 2:
 How many numbers from 1 to n should be tested before
