@@ -46,6 +46,14 @@ Numbers <= 1 are not prime.
 2 is a prime number.
 Even numbers greater than 2 are not prime.
 
+Julia och Fredrik:
+
+Only need to test divisors up to sqrt(n).
+A primenumber is only devided by 1 and itself.
+
+ex. sqrt(28) ≈ 5.3
+If all divisors between 2 and sqrt(28) can divide 28 into an integer it's not a prime.
+28/2 = 14, 28/4 = 7 - There are integers, therefore 28 is not a primenumber.
 
 Question 3:
 Alice wants to send m=15 to Bob. She gets Bob's public
