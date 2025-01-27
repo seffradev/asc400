@@ -24,6 +24,13 @@ Answer 3:
 """
 
 
+def func(a: int, b: int) -> int:
+    """
+    Return the sum of `a` and `b`
+    """
+    return a + b
+
+
 def main():
     """
     The main function, running the project
