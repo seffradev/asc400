@@ -6,6 +6,17 @@ information in the RSA key generator, encryption and
 decryption algorithms an attacker may have access to?
 
 Answer 1:
+AES (Advanced Encryption Standard) is faster than RSA (Rivest-Shamir-Adleman)
+especially when encryption large amounts of data, because of: algorithm design, default in key length,
+computational complexity and hardware support in modern CPUs. Algoritm design has 
+diffrent structures such as asymmetrical and symmetrical and RSA is a asymmetrical one.
+RSA is known for its larger keys (usually 1024 bits) then AES which has smaller keys (usually 256 bits) but it calculate it faster.
+The complexity for the RSA builds on matematical operations which involves factorization with big primnumbers.
+AES is implemented with computer in mind where every operation is a single cycle execution, while RSA is not computer 
+optimized but as a matematical concept instead.
+
+
+
 
 Question 2:
 How many numbers from 1 to n should be tested before
