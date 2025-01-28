@@ -31,7 +31,7 @@ def is_prime(n):
 
 
 # Task 2
-def task_2(a,b):
+def modular_inverse(a,b):
     kvot= []
     rester= [a,b]
     new_a= a
@@ -44,20 +44,18 @@ def task_2(a,b):
         new_a= rester[-1]
 
     if(rester[-2] != 1):
-        return f"{a} och {b} är inte relativt prima"
+        raise ValueError(f"{a} och {b} är inte relativt prima")
 
 
 
     xList = [0]
     yList = [1]
-
     for item in reversed(kvot):
         x = yList[-1] - item * xList[-1]
         y = xList[-1]
         xList.append(x)
         yList.append(y)
 
-    return f"modulära inversen av {a} mod {b} är {xList[-1] % b}"
-
+    return xList[-1] % b
 
 
