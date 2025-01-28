@@ -14,11 +14,12 @@ def test_func():
 
 
 def test_is_prime():
-    number = int(input("Enter an integer to check if it's prime: "))
-    if is_prime(number):
-        print(f"{number} is a prime number.")
-    else:
-        print(f"{number} is not a prime number.")
+    assert not is_prime(1)  # 1 is not prime
+    assert is_prime(2)      # 2 is smallest prime
+    assert is_prime(17)     # Prime number
+    assert not is_prime(18) # Composite number, can be factored into smaller numbers
+    assert is_prime(97)     # Larger prime number
+    assert not is_prime(100)    # Larger composite number
 
 
 # Task 2
