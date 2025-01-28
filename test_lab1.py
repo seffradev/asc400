@@ -3,6 +3,7 @@ A test file to run in CI and with `pytest`.
 """
 
 from lab1 import func
+from lab1 import is_prime
 
 
 def test_func():
@@ -10,6 +11,14 @@ def test_func():
     A simple test. Remove me when interesting things exist.
     """
     assert func(2, 3) == 5
+
+
+def test_is_prime():
+    number = int(input("Enter an integer to check if it's prime: "))
+    if is_prime(number):
+        print(f"{number} is a prime number.")
+    else:
+        print(f"{number} is not a prime number.")
 
 
 # Task 2
