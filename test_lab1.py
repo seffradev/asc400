@@ -20,6 +20,11 @@ def test_is_prime():
     assert not is_prime(18) # Composite number, can be factored into smaller numbers
     assert is_prime(97)     # Larger prime number
     assert not is_prime(100)    # Larger composite number
+    # Borderline cases
+    assert not is_prime(0)
+    assert not is_prime(-1)
+    assert not is_prime(-4)
+    assert not is_prime(-17)
 
 
 # Task 2
