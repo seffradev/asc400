@@ -156,8 +156,8 @@ def modular_inverse(a, b):
     return x_list[-1] % b
 
 # Task 3
-def euler_phi(n):
-    """Euler phi function"""
+def prime_factorization(n):
+    """Prime factorization"""
     phi = n
     devider = 2
     to_the_power_of_counter = 0
@@ -199,6 +199,13 @@ def euler_phi(n):
                 to_the_power_of_counter = 0
         else:
             devider += 1
+    return [list_p_q], [list_p_q_to_the_power_of]
+
+def euler_phi(n):
+    """Euler phi function"""
+    if prime_factorization(n) == 1:
+        return 1
+    [list_p_q], [list_p_q_to_the_power_of] = prime_factorization(n)
 
     result_list = []
     result = 0
@@ -215,33 +222,34 @@ def euler_phi(n):
 
     return result
 
-def task_3_gcd(a, b):
-    """ 
-    lab1.py:218:0: R1710: Either all return statements in
-    a function should return an expression, or none of them should.
-    (inconsistent-return-statements)
-    """
-    rester = [a, b]
-    new_a = a
-    new_b = b
+# def task_3_gcd(a, b):
+#     """
+#     Ali
+#     lab1.py:218:0: R1710: Either all return statements in
+#     a function should return an expression, or none of them should.
+#     (inconsistent-return-statements)
+#     """
+#     rester = [a, b]
+#     new_a = a
+#     new_b = b
 
-    while rester[-1] != 0:
-        rester.append(new_b % new_a)
-        new_b = new_a
-        new_a = rester[-1]
+#     while rester[-1] != 0:
+#         rester.append(new_b % new_a)
+#         new_b = new_a
+#         new_a = rester[-1]
 
-    if rester[-2] == 1:
-        return 1
+#     if rester[-2] == 1:
+#         return 1
 
-def task_3(n):
-    """Ali"""
-    if n <= 0:
-        return ValueError("Incorrect n value, n must be 1 or more")
-    antal_positiva_tal= 1
-    for i in range(2, n):
-        if task_3_gcd(i,n) == 1:
-            antal_positiva_tal +=1
-    return antal_positiva_tal
+# def task_3(n):
+#     """Ali"""
+#     if n <= 0:
+#         return ValueError("Incorrect n value, n must be 1 or more")
+#     antal_positiva_tal= 1
+#     for i in range(2, n):
+#         if task_3_gcd(i,n) == 1:
+#             antal_positiva_tal +=1
+#     return antal_positiva_tal
 
 def main():
     """
