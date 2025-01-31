@@ -7,13 +7,6 @@ from lab1 import is_prime
 from lab1 import euler_phi
 
 
-def test_func():
-    """
-    A simple test. Remove me when interesting things exist.
-    """
-    assert func(2, 3) == 5
-
-
 def test_is_prime():
     """Test cases for the is_prime function."""
     assert not is_prime(1)  # 1 is not prime

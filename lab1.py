@@ -192,13 +192,6 @@ def euler_phi(n):
     result = result_list[0] * result_list[1]
     return result
 
-def func(a: int, b: int) -> int:
-    """
-    Return the sum of `a` and `b`
-    """
-    return a + b
-
-
 def main():
     """
     The main function, running the project
