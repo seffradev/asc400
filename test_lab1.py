@@ -22,6 +22,12 @@ def test_is_prime():
 
 def test_euler_phi():
     """Test euler phi function"""
+    assert euler_phi(9) == 6
     assert euler_phi(10) == 4
-    #assert euler_phi(77) == 60 #Doesn't work
+    assert euler_phi(11) == 10
+    assert euler_phi(12) == 4
+    assert euler_phi(13) == 12
+    assert euler_phi(1) == 1
+    assert euler_phi(2) == 1
+    assert euler_phi(77) == 60
     assert euler_phi(22) == 10

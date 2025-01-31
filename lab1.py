@@ -159,6 +159,8 @@ def modular_inverse(a, b):
 def euler_phi(n):
     """Euler phi function"""
     phi = n
+    if phi == 1:
+        return 1
     devider = 2
     to_the_power_of_counter = 0
     list_p_q = []
@@ -167,35 +169,57 @@ def euler_phi(n):
 
     while loop:
         answer = phi / devider
+        if answer == 1:
+            return 1
         if is_prime(devider):
+            
             if answer % 1 == 0: #If answer is an integer.
-                to_the_power_of_counter += 1
                 phi = answer
+                to_the_power_of_counter += 1
+                if is_prime(answer):
+                    if answer == devider:
+                        to_the_power_of_counter += 1
+                        list_p_q.append(phi)
+                        list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                        loop = False
+                    else:
+                        list_p_q.append(devider)
+                        list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                        list_p_q.append(answer)
+                        list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                        loop = False
 
             elif is_prime(phi):
                 loop = False
+                to_the_power_of_counter += 1
                 list_p_q.append(devider)
+                list_p_q_to_the_power_of.append(to_the_power_of_counter)
                 list_p_q.append(phi)
                 list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                to_the_power_of_counter = 0
 
             else:
-                list_p_q.append(devider)
                 devider += 1
-                list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                if to_the_power_of_counter != 0:
+                    list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                to_the_power_of_counter = 0
         else:
             devider += 1
 
     result_list = []
+    result = 0
 
-    for pq in list_p_q:
-        answer = pq - 1
-        result_list.append(answer)
-
-    result = result_list[0] * result_list[1]
+    if len(list_p_q) == 1:
+        result = int(n * (1 - (1 / list_p_q[0])))
+    elif list_p_q_to_the_power_of[0] == 1 and list_p_q_to_the_power_of[1] == 1:
+        for pq in list_p_q:
+            answer = pq - 1
+            result_list.append(answer)
+        result = result_list[0] * result_list[1]
+    else:
+        result = int(n * (1 - (1 / list_p_q[0])) * (1 - (1 / list_p_q[1])))
+    
     return result
-
-
-
 
 def task_3_gcd(a, b):
     rester = [a, b]
@@ -210,7 +234,6 @@ def task_3_gcd(a, b):
     if(rester[-2] == 1):
         return 1
 
-
 def task_3(n): 
     if(n <= 0):
         return ValueError("Incorrect n value, n must be 1 or more")
@@ -220,17 +243,11 @@ def task_3(n):
             antal_positiva_tal +=1
     return antal_positiva_tal
 
-
-
-
-
-
 def main():
     """
     The main function, running the project
     """
     print("Hello, world!")
-
 
 if __name__ == "__main__":
     main()
