@@ -2,7 +2,6 @@
 A test file to run in CI and with `pytest`.
 """
 
-from lab1 import func
 from lab1 import is_prime
 from lab1 import euler_phi
 
