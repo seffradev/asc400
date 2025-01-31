@@ -129,6 +129,8 @@ def is_prime(n):
 # Task 2
 def modular_inverse(a, b):
     """Compute the modular inverse of a modulo b using the extended Euclidean algorithm."""
+    if(a == 1):
+        return 1
     quotient = []
     remainders = [a, b]
     new_a = a
@@ -191,6 +193,37 @@ def euler_phi(n):
 
     result = result_list[0] * result_list[1]
     return result
+
+
+
+
+def task_3_gcd(a, b):
+    rester = [a, b]
+    new_a = a
+    new_b = b
+
+    while rester[-1] != 0:
+        rester.append(new_b % new_a)
+        new_b = new_a
+        new_a = rester[-1]
+
+    if(rester[-2] == 1):
+        return 1
+
+
+def task_3(n): 
+    if(n <= 0):
+        return ValueError("Incorrect n value, n must be 1 or more")
+    antal_positiva_tal= 1
+    for i in range(2, n):
+        if task_3_gcd(i,n) == 1:
+            antal_positiva_tal +=1
+    return antal_positiva_tal
+
+
+
+
+
 
 def main():
     """
