@@ -102,6 +102,8 @@ c = 15**19 mod 77 =
 
 Answer: c = 36
 
+Reference: https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/fast-modular-exponentiation
+
 """
 
 
