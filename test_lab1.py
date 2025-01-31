@@ -14,6 +14,7 @@ def test_func():
 
 
 def test_is_prime():
+    """Test cases for the is_prime function."""
     assert not is_prime(1)  # 1 is not prime
     assert is_prime(2)      # 2 is smallest prime
     assert is_prime(17)     # Prime number

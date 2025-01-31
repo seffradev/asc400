@@ -69,6 +69,7 @@ Answer 3:
 
 # Task 1:
 def is_prime(n):
+    """Check if a given number is prime."""
     if n <= 1:  # Numbers less than or equal to 1 are not prime.
         return False
     if n == 2:  # 2 is a prime number.
@@ -85,6 +86,7 @@ def is_prime(n):
 
 # Task 2
 def modular_inverse(a,b):
+    """Compute the modular inverse of a modulo b using the extended Euclidean algorithm."""
     kvot= []
     rester= [a,b]
     new_a= a
@@ -96,18 +98,18 @@ def modular_inverse(a,b):
         new_b = new_a
         new_a= rester[-1]
 
-    if(rester[-2] != 1):
+    if rester[-2] != 1:
         raise ValueError(f"{a} och {b} är inte relativt prima")
 
-    xList = [0]
-    yList = [1]
+    xlist = [0]
+    ylist = [1]
     for item in reversed(kvot):
-        x = yList[-1] - item * xList[-1]
-        y = xList[-1]
-        xList.append(x)
-        yList.append(y)
+        x = ylist[-1] - item * xlist[-1]
+        y = xlist[-1]
+        xlist.append(x)
+        ylist.append(y)
 
-    return xList[-1] % b
+    return xlist[-1] % b
 
 def func(a: int, b: int) -> int:
     """
