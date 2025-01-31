@@ -30,6 +30,7 @@ b) The RSA algorithm shares the public key which enables encryption by others.
 An attacker can observe the encrypted text and use the public key to perform an analysis.
 RSA relies on well-known algorithms.
 
+
 Question 2:
 How many numbers from 1 to n should be tested before
 deciding if n is prime or not? Why?
@@ -57,6 +58,7 @@ ex. sqrt(28) ≈ 5.3
 If any number between 2 and sqrt(28) divides 28 exactly, then 28 is not a prime.
 28/2 = 14, 28/4 = 7 - There are integers, therefore 28 is not a primenumber.
 
+
 Question 3:
 Alice wants to send m=15 to Bob. She gets Bob's public
 key pk=(19,77) by visiting a public repository. If she
@@ -66,6 +68,7 @@ resulting cipher text be? (Show your calculation)
 Answer 3:
 
 """
+
 
 # Task 1:
 def is_prime(n):
@@ -84,32 +87,34 @@ def is_prime(n):
             return False
     return True
 
+
 # Task 2
-def modular_inverse(a,b):
+def modular_inverse(a, b):
     """Compute the modular inverse of a modulo b using the extended Euclidean algorithm."""
-    kvot= []
-    rester= [a,b]
-    new_a= a
-    new_b= b
+    quotient = []
+    remainders = [a, b]
+    new_a = a
+    new_b = b
 
-    while rester[-1] != 0:
-        kvot.append(new_b//new_a)
-        rester.append(new_b % new_a)
+    while remainders[-1] != 0:
+        quotient.append(new_b // new_a)
+        remainders.append(new_b % new_a)
         new_b = new_a
-        new_a= rester[-1]
+        new_a = remainders[-1]
 
-    if rester[-2] != 1:
-        raise ValueError(f"{a} och {b} är inte relativt prima")
+    if remainders[-2] != 1:
+        raise ValueError(f"{a} and {b} are not relatively prime")
 
-    xlist = [0]
-    ylist = [1]
-    for item in reversed(kvot):
-        x = ylist[-1] - item * xlist[-1]
-        y = xlist[-1]
-        xlist.append(x)
-        ylist.append(y)
+    x_list = [0]
+    y_list = [1]
+    for item in reversed(quotient):
+        x = y_list[-1] - item * x_list[-1]
+        y = x_list[-1]
+        x_list.append(x)
+        y_list.append(y)
 
-    return xlist[-1] % b
+    return x_list[-1] % b
+
 
 def func(a: int, b: int) -> int:
     """
@@ -117,11 +122,13 @@ def func(a: int, b: int) -> int:
     """
     return a + b
 
+
 def main():
     """
     The main function, running the project
     """
     print("Hello, world!")
+
 
 if __name__ == "__main__":
     main()
