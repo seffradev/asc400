@@ -159,44 +159,38 @@ def modular_inverse(a, b):
 def euler_phi(n):
     """Euler phi function"""
     phi = n
-    if phi == 1:
-        return 1
     devider = 2
     to_the_power_of_counter = 0
     list_p_q = []
     list_p_q_to_the_power_of = []
-    loop = True
 
-    while loop:
+    while True:
         answer = phi / devider
-        if answer == 1:
+        if answer == 1 or phi == 1:
             return 1
         if is_prime(devider):
-
-            if answer % 1 == 0: #If answer is an integer.
+            to_the_power_of_counter += 1
+            if answer % 1 == 0: # If answer is an integer.
                 phi = answer
-                to_the_power_of_counter += 1
                 if is_prime(answer):
                     if answer == devider:
-                        to_the_power_of_counter += 1
                         list_p_q.append(phi)
                         list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                        loop = False
-                    else:
-                        list_p_q.append(devider)
-                        list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                        list_p_q.append(answer)
-                        list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                        loop = False
+                        break
 
-            elif is_prime(phi):
-                loop = False
-                to_the_power_of_counter += 1
+                    list_p_q.append(devider)
+                    list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                    list_p_q.append(answer)
+                    list_p_q_to_the_power_of.append(to_the_power_of_counter)
+                    break
+
+            elif is_prime(phi): # Rule: n is prime number
                 list_p_q.append(devider)
                 list_p_q_to_the_power_of.append(to_the_power_of_counter)
                 list_p_q.append(phi)
                 list_p_q_to_the_power_of.append(to_the_power_of_counter)
                 to_the_power_of_counter = 0
+                break
 
             else:
                 devider += 1
@@ -209,20 +203,24 @@ def euler_phi(n):
     result_list = []
     result = 0
 
-    if len(list_p_q) == 1:
+    if len(list_p_q) == 1: # Rule: General formula
         result = int(n * (1 - (1 / list_p_q[0])))
-    elif list_p_q_to_the_power_of[0] == 1 and list_p_q_to_the_power_of[1] == 1:
+    elif list_p_q_to_the_power_of[-2:] == [1, 1]: # Rule: n=p×q, two different prime numbers
         for pq in list_p_q:
             answer = pq - 1
             result_list.append(answer)
-        result = result_list[0] * result_list[1]
-    else:
-        result = int(n * (1 - (1 / list_p_q[0])) * (1 - (1 / list_p_q[1])))
+        result = result_list[-2] * result_list[-1]
+    else: # Rule: n = p**k, prime number to the power of k
+        result = int(n * (1 - (1 / list_p_q[-2])) * (1 - (1 / list_p_q[-1])))
 
     return result
 
 def task_3_gcd(a, b):
-    """GCD"""
+    """ 
+    lab1.py:218:0: R1710: Either all return statements in
+    a function should return an expression, or none of them should.
+    (inconsistent-return-statements)
+    """
     rester = [a, b]
     new_a = a
     new_b = b
