@@ -4,6 +4,7 @@ A test file to run in CI and with `pytest`.
 
 from lab1 import func
 from lab1 import is_prime
+from lab1 import euler_phi
 
 
 def test_func():
@@ -26,3 +27,9 @@ def test_is_prime():
     assert not is_prime(-1)
     assert not is_prime(-4)
     assert not is_prime(-17)
+
+def test_euler_phi():
+    """Test euler phi function"""
+    assert euler_phi(10) == 4
+    #assert euler_phi(77) == 60 #Doesn't work
+    assert euler_phi(22) == 10

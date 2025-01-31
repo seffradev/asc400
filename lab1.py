@@ -153,6 +153,44 @@ def modular_inverse(a, b):
 
     return x_list[-1] % b
 
+# Task 3
+def euler_phi(n):
+    """Euler phi function"""
+    phi = n
+    devider = 2
+    to_the_power_of_counter = 0
+    list_p_q = []
+    list_p_q_to_the_power_of = []
+    loop = True
+
+    while loop:
+        answer = phi / devider
+        if is_prime(devider):
+            if answer % 1 == 0: #If answer is an integer.
+                to_the_power_of_counter += 1
+                phi = answer
+
+            elif is_prime(phi):
+                loop = False
+                list_p_q.append(devider)
+                list_p_q.append(phi)
+                list_p_q_to_the_power_of.append(to_the_power_of_counter)
+
+            else:
+                list_p_q.append(devider)
+                devider += 1
+                list_p_q_to_the_power_of.append(to_the_power_of_counter)
+        else:
+            devider += 1
+
+    result_list = []
+
+    for pq in list_p_q:
+        answer = pq - 1
+        result_list.append(answer)
+
+    result = result_list[0] * result_list[1]
+    return result
 
 def func(a: int, b: int) -> int:
     """
