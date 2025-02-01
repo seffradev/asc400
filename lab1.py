@@ -203,6 +203,8 @@ def prime_factorization(n):
 
 def euler_phi(n):
     """Euler phi function"""
+    if n <= 0:
+        return 0
     if prime_factorization(n) == 1:
         return 1
     [list_p_q], [list_p_q_to_the_power_of] = prime_factorization(n)
