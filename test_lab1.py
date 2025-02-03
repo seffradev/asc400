@@ -2,8 +2,13 @@
 A test file to run in CI and with `pytest`.
 """
 
+import pytest
 from lab1 import is_prime
+from lab1 import gcd
+from lab1 import modular_inverse
 from lab1 import euler_phi
+from lab1 import eea
+from lab1 import task_3
 
 
 def test_is_prime():
@@ -19,6 +24,47 @@ def test_is_prime():
     assert not is_prime(-1)
     assert not is_prime(-4)
     assert not is_prime(-17)
+
+
+def test_gcd():
+    """test gcd function"""
+    assert gcd(48, 18) == 6
+    assert gcd(101, 103) == 1
+    assert gcd(-48, 18) == 6
+    assert gcd(0, 7) == 7
+
+
+def test_eea():
+    """Test Euler phi function"""
+    assert eea(3, 20) == 7
+    assert eea(3, 11) == 4
+    assert eea(7, 40) == 23
+    assert eea(17, 3120) == 2753
+    assert eea(3, 11) == 4
+    assert eea(9, 26) == 3
+    assert eea(10, 17) == 12
+    assert eea(15, 28) == 15
+    assert eea(12, 31) == 13
+    assert eea(35, 64) == 11
+    with pytest.raises(ValueError):
+        eea(5, 15)
+
+
+def test_modular_inverse():
+    """test modular inverse function"""
+    assert modular_inverse(3, 20) == 7
+    assert modular_inverse(3, 11) == 4
+    assert modular_inverse(7, 40) == 23
+    assert modular_inverse(3, 11) == 4
+    assert modular_inverse(9, 26) == 3
+    assert modular_inverse(15, 28) == 15
+    assert modular_inverse(12, 31) == 13
+    assert modular_inverse(35, 64) == 11
+    assert modular_inverse(10, 17) == 12
+    assert modular_inverse(17, 3120) == 2753
+    with pytest.raises(ValueError):
+        modular_inverse(5, 15)
+
 
 def test_euler_phi():
     """Test euler phi function"""
@@ -55,3 +101,40 @@ def test_euler_phi():
     assert euler_phi(12) == 4  # 2² * 3
     assert euler_phi(20) == 8  # 2² * 5
     assert euler_phi(30) == 8  # 2 * 3 * 5
+
+
+def test_task_3():
+    """Test euler phi function"""
+    # Edge cases
+    #assert task_3(0) == 0  # May be undefined, but assuming it returns 0
+    assert task_3(1) == 1  # Only 1 is coprime with itself
+
+    # Prime numbers (φ(p) = p - 1)
+    assert task_3(2) == 1
+    assert task_3(5) == 4
+    assert task_3(7) == 6
+    assert task_3(11) == 10
+    assert task_3(13) == 12
+    assert task_3(17) == 16
+    assert task_3(101) == 100  # Large prime number
+
+    # Powers of prime numbers (φ(p^k) = p^k - p^(k-1))
+    assert task_3(4) == 2  # 2²
+    assert task_3(8) == 4  # 2³
+    assert task_3(9) == 6  # 3²
+    assert task_3(16) == 8  # 2⁴
+    assert task_3(1024) == 512  # 2¹⁰
+
+    # Product of two distinct prime numbers (φ(mn) = φ(m)φ(n))
+    assert task_3(10) == 4  # 2 * 5
+    assert task_3(14) == 6  # 2 * 7
+    assert task_3(15) == 8  # 3 * 5
+    assert task_3(21) == 12  # 3 * 7
+    assert task_3(22) == 10  # 2 * 11
+    assert task_3(35) == 24  # 5 * 7
+    assert task_3(77) == 60  # 7 * 11
+
+    # More composite numbers
+    assert task_3(12) == 4  # 2² * 3
+    assert task_3(20) == 8  # 2² * 5
+    assert task_3(30) == 8  # 2 * 3 * 5

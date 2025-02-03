@@ -35,7 +35,7 @@ Question 2:
 How many numbers from 1 to n should be tested before
 deciding if n is prime or not? Why?
 
-Answer 2:
+Answer 2 alt 2:
 You only need to test numbers from 2 to the square root of (n), inclusive (n).
 A prime number has no divisor other than 1 and itself.
 Therefore:
@@ -48,6 +48,7 @@ Numbers <= 1 are not prime.
 2 is a prime number.
 Even numbers greater than 2 are not prime.
 
+Answer 2 alt 3:
 Julia och Fredrik:
 
 If a number n has a divisor greater than sqrt(n), the other divisor must
@@ -126,7 +127,7 @@ def is_prime(n):
     return True
 
 
-# Task 2
+# Task 2 alt 1
 def modular_inverse(a, b):
     """Compute the modular inverse of a modulo b using the extended Euclidean algorithm."""
     if a == 1:
@@ -155,7 +156,70 @@ def modular_inverse(a, b):
 
     return x_list[-1] % b
 
-# Task 3
+
+# Task 2 alt 2
+def gcd(e, n):
+    """"Find gcd"""
+    if e == 0:
+        return n
+    if n == 0:
+        return e
+    if e == 0 and n == 0:
+        return 0
+
+    list_e = []
+    list_n = []
+
+    divider_e = 1
+    divider_n = 1
+
+    while True:
+        result = abs(e) / divider_e
+        if result % 1 == 0:
+            list_e.append(int(result))
+        divider_e += 1
+        if divider_e > abs(e):
+            break
+
+    while True:
+        result = abs(n) / divider_n
+        if result % 1 == 0:
+            list_n.append(int(result))
+        divider_n += 1
+        if divider_n > abs(n):
+            break
+
+    list_gcd = []
+
+    for number_e in list_e:
+        for number_n in list_n:
+            if number_e == number_n:
+                list_gcd.append(number_e)
+
+    return list_gcd[0]
+
+
+def eea(e, n):
+    """Extended Euclidean algorithm"""
+
+    if gcd(e, n) != 1:
+        raise ValueError("Not relative prime")
+
+    new_n = n
+    new_e = e
+    inverse = [0, 1]
+    quotient = [0]
+    while new_e != 0:
+        quotient.append(new_n // new_e)
+        temp = new_e
+        new_e = new_n % new_e
+        new_n = temp
+        inverse.append(inverse[-2] - (inverse[-1] * quotient[-1]))
+
+    return inverse[-2] % n
+
+
+# Task 3 alt 1
 def prime_factorization(n):
     """Prime factorization"""
     phi = n
@@ -201,6 +265,7 @@ def prime_factorization(n):
             devider += 1
     return [list_p_q], [list_p_q_to_the_power_of]
 
+
 def euler_phi(n):
     """Euler phi function"""
     if n <= 0:
@@ -224,40 +289,50 @@ def euler_phi(n):
 
     return result
 
-# def task_3_gcd(a, b):
-#     """
-#     Ali
-#     lab1.py:218:0: R1710: Either all return statements in
-#     a function should return an expression, or none of them should.
-#     (inconsistent-return-statements)
-#     """
-#     rester = [a, b]
-#     new_a = a
-#     new_b = b
 
-#     while rester[-1] != 0:
-#         rester.append(new_b % new_a)
-#         new_b = new_a
-#         new_a = rester[-1]
+# Task 3 alt 2
+def task_3_gcd(a, b):
+    """
+    GCD
+    lab1.py:218:0: R1710: Either all return statements in
+    a function should return an expression, or none of them should.
+    (inconsistent-return-statements)
+    """
+    rester = [a, b]
+    new_a = a
+    new_b = b
 
-#     if rester[-2] == 1:
-#         return 1
+    while rester[-1] != 0:
+        rester.append(new_b % new_a)
+        new_b = new_a
+        new_a = rester[-1]
 
-# def task_3(n):
-#     """Ali"""
-#     if n <= 0:
-#         return ValueError("Incorrect n value, n must be 1 or more")
-#     antal_positiva_tal= 1
-#     for i in range(2, n):
-#         if task_3_gcd(i,n) == 1:
-#             antal_positiva_tal +=1
-#     return antal_positiva_tal
+    if rester[-2] == 1:
+        return 1
 
+
+def task_3(n):
+    """Euler phi
+    #assert task_3(0) == 0  # May be undefined, but assuming it returns 0"""
+    if n <= 0:
+        return ValueError("Incorrect n value, n must be 1 or more")
+    antal_positiva_tal= 1
+    for i in range(2, n):
+        if task_3_gcd(i,n) == 1:
+            antal_positiva_tal +=1
+    return antal_positiva_tal
+
+
+# Task 4, alt 1
+
+
+# Main menu
 def main():
     """
     The main function, running the project
     """
     print("Hello, world!")
+
 
 if __name__ == "__main__":
     main()
