@@ -158,6 +158,34 @@ def modular_inverse(a, b):
 
 
 # Task 2 alt 2
+def eea(e, n):
+    """Extended Euclidean algorithm
+    
+    Refer to Lab1_ RSA toolbox.pdf, page 9.
+    According to the reference, the greatest common divisor (GCD)
+    must be calculated to find the modular inverse of e modulo N.
+
+    GCD (e, Ф (N)) = 1
+    inverse (i) = inverse (i-2) - (inverse (i-1) * quotient (i-1)) 
+    """
+
+    if gcd(e, n) != 1:
+        raise ValueError("Not relative prime")
+
+    new_n = n
+    new_e = e
+    inverse = [0, 1]
+    quotient = [0]
+    while new_e != 0:
+        quotient.append(new_n // new_e)
+        temp = new_e
+        new_e = new_n % new_e
+        new_n = temp
+        inverse.append(inverse[-2] - (inverse[-1] * quotient[-1]))
+
+    return inverse[-2] % n
+
+
 def gcd(e, n):
     """"Find gcd"""
     if e == 0:
@@ -199,26 +227,6 @@ def gcd(e, n):
     return list_gcd[0]
 
 
-def eea(e, n):
-    """Extended Euclidean algorithm"""
-
-    if gcd(e, n) != 1:
-        raise ValueError("Not relative prime")
-
-    new_n = n
-    new_e = e
-    inverse = [0, 1]
-    quotient = [0]
-    while new_e != 0:
-        quotient.append(new_n // new_e)
-        temp = new_e
-        new_e = new_n % new_e
-        new_n = temp
-        inverse.append(inverse[-2] - (inverse[-1] * quotient[-1]))
-
-    return inverse[-2] % n
-
-
 # Task 3 alt 1
 def task_3_gcd(a, b):
     """
@@ -255,8 +263,48 @@ def task_3(n):
 
 
 # Task 3 alt 2
+def euler_phi(n):
+    """Euler phi function
+    Refer to Lab1_ RSA toolbox.pdf, page 4.
+    "Find its prime factors and find the greatest common one"
+
+    Refer to https://www.geeksforgeeks.org/eulers-totient-function/
+    "If n is a prime number"
+    "If n is a power of a prime p**k"
+    "Multiplicative Property"
+    "General formula"
+    """
+    if n <= 0:
+        return 0
+    if prime_factorization(n) == 1:
+        return 1
+    [list_p_q], [list_p_q_to_the_power_of] = prime_factorization(n)
+
+    result_list = []
+    result = 0
+
+    if len(list_p_q) == 1: # Rule: General formula
+        result = int(n * (1 - (1 / list_p_q[0])))
+    elif list_p_q_to_the_power_of[-2:] == [1, 1]: # Rule: n=p×q, two different prime numbers
+        for pq in list_p_q:
+            answer = pq - 1
+            result_list.append(answer)
+        result = result_list[-2] * result_list[-1]
+    else: # Rule: n = p**k, prime number to the power of k
+        result = int(n * (1 - (1 / list_p_q[-2])) * (1 - (1 / list_p_q[-1])))
+
+    return result
+
+
 def prime_factorization(n):
-    """Prime factorization"""
+    """Prime factorization
+    Take the number and divide it by the smallest prime, 2.
+    Check if the result is an integer and whether it is prime.
+    If it is not an integer, divide the original number by the next prime.
+    If it is an integer but not a prime, continue dividing by 2.
+    When a prime factor is found, add it to the list along with the count
+    of divisions to represent its exponent.
+    """
     phi = n
     devider = 2
     to_the_power_of_counter = 0
@@ -301,33 +349,11 @@ def prime_factorization(n):
     return [list_p_q], [list_p_q_to_the_power_of]
 
 
-def euler_phi(n):
-    """Euler phi function"""
-    if n <= 0:
-        return 0
-    if prime_factorization(n) == 1:
-        return 1
-    [list_p_q], [list_p_q_to_the_power_of] = prime_factorization(n)
-
-    result_list = []
-    result = 0
-
-    if len(list_p_q) == 1: # Rule: General formula
-        result = int(n * (1 - (1 / list_p_q[0])))
-    elif list_p_q_to_the_power_of[-2:] == [1, 1]: # Rule: n=p×q, two different prime numbers
-        for pq in list_p_q:
-            answer = pq - 1
-            result_list.append(answer)
-        result = result_list[-2] * result_list[-1]
-    else: # Rule: n = p**k, prime number to the power of k
-        result = int(n * (1 - (1 / list_p_q[-2])) * (1 - (1 / list_p_q[-1])))
-
-    return result
-
-
 # Task 4, alt 1
 def public_to_private_key_alt_1(e,n):
-    """
+    """ Find secret key (d, n) from public key (e, n). 
+
+    Refer to Lab 1_RSA Toolbox_lab manual.pdf, page 5.
     d = e**-1 mod Ф (N)
     """
     modulus_n = task_3(n)
@@ -338,7 +364,9 @@ def public_to_private_key_alt_1(e,n):
 
 # Task 4, alt 2
 def public_to_private_key(e, n):
-    """
+    """ Find secret key (d, n) from public key (e, n).
+
+    Refer to Lab 1_RSA Toolbox_lab manual.pdf, page 5.
     d = e**-1 mod Ф (N)
     """
     modulus_n = euler_phi(n)
