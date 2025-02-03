@@ -220,6 +220,41 @@ def eea(e, n):
 
 
 # Task 3 alt 1
+def task_3_gcd(a, b):
+    """
+    GCD
+    lab1.py:218:0: R1710: Either all return statements in
+    a function should return an expression, or none of them should.
+    (inconsistent-return-statements)
+    """
+    rester = [a, b]
+    new_a = a
+    new_b = b
+
+    while rester[-1] != 0:
+        rester.append(new_b % new_a)
+        new_b = new_a
+        new_a = rester[-1]
+
+    if rester[-2] == 1:
+        return 1
+
+
+def task_3(n):
+    """Euler phi
+    with pytest.raises(ValueError):
+        task_3(0)
+    """
+    if n <= 0:
+        return ValueError("Incorrect n value, n must be 1 or more")
+    antal_positiva_tal= 1
+    for i in range(2, n):
+        if task_3_gcd(i,n) == 1:
+            antal_positiva_tal +=1
+    return antal_positiva_tal
+
+
+# Task 3 alt 2
 def prime_factorization(n):
     """Prime factorization"""
     phi = n
@@ -290,43 +325,29 @@ def euler_phi(n):
     return result
 
 
-# Task 3 alt 2
-def task_3_gcd(a, b):
-    """
-    GCD
-    lab1.py:218:0: R1710: Either all return statements in
-    a function should return an expression, or none of them should.
-    (inconsistent-return-statements)
-    """
-    rester = [a, b]
-    new_a = a
-    new_b = b
-
-    while rester[-1] != 0:
-        rester.append(new_b % new_a)
-        new_b = new_a
-        new_a = rester[-1]
-
-    if rester[-2] == 1:
-        return 1
-
-
-def task_3(n):
-    """Euler phi
-    #assert task_3(0) == 0  # May be undefined, but assuming it returns 0"""
-    if n <= 0:
-        return ValueError("Incorrect n value, n must be 1 or more")
-    antal_positiva_tal= 1
-    for i in range(2, n):
-        if task_3_gcd(i,n) == 1:
-            antal_positiva_tal +=1
-    return antal_positiva_tal
-
-
 # Task 4, alt 1
+def public_to_private_key_alt_1(e,n):
+    """
+    d = e**-1 mod Ф (N)
+    """
+    modulus_n = task_3(n)
+    inverse_e = modular_inverse(e, modulus_n)
+    d = inverse_e % modulus_n
+    return d
 
 
-# Main menu
+# Task 4, alt 2
+def public_to_private_key(e, n):
+    """
+    d = e**-1 mod Ф (N)
+    """
+    modulus_n = euler_phi(n)
+    inverse_e = eea(e, modulus_n)
+    d = inverse_e % modulus_n
+    return d
+
+
+# Main
 def main():
     """
     The main function, running the project
