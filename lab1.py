@@ -187,6 +187,7 @@ def gcd(e, n):
     return max(list_gcd)
 
 
+# Task 3 alt 1
 def task_3(n):
     """Euler phi
     with pytest.raises(ValueError):
