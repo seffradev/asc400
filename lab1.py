@@ -170,9 +170,7 @@ def eea(e, n):
     quotient = [0]
     while new_e != 0:
         quotient.append(new_n // new_e)
-        temp = new_e
-        new_e = new_n % new_e
-        new_n = temp
+        new_n, new_e = new_e, new_n % new_e
         inverse.append(inverse[-2] - (inverse[-1] * quotient[-1]))
 
     return inverse[-2] % n
@@ -184,8 +182,6 @@ def gcd(e, n):
         return n
     if n == 0:
         return e
-    if e == 0 and n == 0:
-        return 0
 
     list_e = []
     list_n = []
@@ -216,7 +212,7 @@ def gcd(e, n):
             if number_e == number_n:
                 list_gcd.append(number_e)
 
-    return list_gcd[0]
+    return max(list_gcd)
 
 
 # Task 3 alt 1
