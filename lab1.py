@@ -318,12 +318,60 @@ def public_to_private_key(e, n):
     return d
 
 
-# Main
+def get_action():
+    """Get an action from the user; it repeats by default"""
+    action = "repeat"
+
+    try:
+        print("1. is_prime")
+        print("2. eea")
+        print("3. phi")
+        print("4. inverse")
+        print("5. exit")
+        task = int(input("Pick a task: "))
+        # Python doesn't have good enums :(
+        if task == 1:
+            action = "is_prime"
+        if task == 2:
+            action = "eea"
+        if task == 3:
+            action = "phi"
+        if task == 4:
+            action = "inverse"
+        if task == 5:
+            action = "exit"
+    except ValueError:
+        print("You should enter an integer")
+    except Exception:
+        pass
+
+    return action
+
+
 def main():
     """
-    The main function, running the project
+    The main function, running the interactive version
+    of the project
     """
-    print("Hello, world!")
+    running = True
+    while running:
+        action = get_action()
+
+        if action == "exit":
+            running = False
+        elif action == "is_prime":
+            # TODO: Input validation
+            number = int(input("Enter a number to see if it's prime: "))
+            print(number, "is" if is_prime(number) else "is not", "prime")
+        elif action == "eea":
+            # TODO: Input validation
+            e = int(input("Enter e: "))
+            n = int(input("Enter n: "))
+            print(eea(e, n))
+        elif action == "phi":
+            number = input("Enter a number to see if it's prime")
+        elif action == "inverse":
+            number = input("Enter a number to see if it's prime")
 
 
 if __name__ == "__main__":
