@@ -1,7 +1,7 @@
 """
 Question 1:
 a) What makes an asymmetric scheme like RSA slower than its
-symmetric alternatives such as AES? Explain. 
+symmetric alternatives such as AES? Explain.
 b) Also, what information in the RSA key generator, encryption and
 decryption algorithms an attacker may have access to?
 
@@ -18,13 +18,17 @@ structures; AES is a symmetric encryption algorithm,
 while RSA is an asymmetric one. RSA is characterized by its
 use of larger key sizes, typically 1024 bits or more, compared
 to AES, which commonly uses smaller key sizes, such as 256 bits.
-Despite RSA's larger key sizes, AES outperforms it in terms of speed.
+The key size difference can intuitively lead to AES outperforming
+RSA.
 
 The computational complexity of RSA relies on mathematical
-operations involving the factorization of large prime numbers. 
+operations involving the factorization of large prime numbers.
 AES is implemented with computer in mind where every operation
 is a single cycle execution, while RSA is not computer optimized
-but as a matematical concept instead.
+but as a matematical concept instead. This makes AES easy to
+implement at the hardware level meaning pure CPU instructions can
+perform an encryption and decryption with AES, while RSA is too
+complex.
 
 b) The RSA algorithm shares the public key which enables encryption by others.
 An attacker can observe the encrypted text and use the public key to perform an analysis.
