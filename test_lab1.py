@@ -29,6 +29,10 @@ def test_is_prime():
     assert not is_prime(-1)
     assert not is_prime(-4)
     assert not is_prime(-17)
+    assert not is_prime(-2.1)
+    assert not is_prime(9.1)
+    assert not is_prime(5.1)
+    assert not is_prime(2.1)
 
 
 def test_modular_inverse():
