@@ -3,14 +3,16 @@ A test file to run in CI and with `pytest`.
 """
 
 import pytest
-from lab1 import is_prime
-from lab1 import gcd
-from lab1 import modular_inverse
-from lab1 import euler_phi
-from lab1 import eea
-from lab1 import task_3
-from lab1 import public_to_private_key
-from lab1 import public_to_private_key_alt_1
+from lab1 import (
+    is_prime,
+    gcd,
+    modular_inverse,
+    euler_phi,
+    eea,
+    task_3,
+    public_to_private_key,
+    public_to_private_key_alt_1,
+)
 
 
 def test_is_prime():
@@ -19,11 +21,11 @@ def test_is_prime():
     Test cases for the is_prime function.
     """
     assert not is_prime(1)  # 1 is not prime
-    assert is_prime(2)      # 2 is smallest prime
-    assert is_prime(17)     # Prime number
-    assert not is_prime(18) # Composite number, can be factored into smaller numbers
-    assert is_prime(97)     # Larger prime number
-    assert not is_prime(100)    # Larger composite number
+    assert is_prime(2)  # 2 is smallest prime
+    assert is_prime(17)  # Prime number
+    assert not is_prime(18)  # Composite number, can be factored into smaller numbers
+    assert is_prime(97)  # Larger prime number
+    assert not is_prime(100)  # Larger composite number
     # edge cases
     assert not is_prime(0)
     assert not is_prime(-1)
@@ -90,7 +92,7 @@ def test_task_3():
     Test euler phi alt 1 function.
     """
     # Edge cases
-    #with pytest.raises(ValueError):
+    # with pytest.raises(ValueError):
     #    task_3(0)
     assert task_3(1) == 1  # Only 1 is coprime with itself
 
