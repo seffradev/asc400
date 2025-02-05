@@ -248,33 +248,33 @@ def prime_factorization(n):
     of divisions to represent its exponent.
     """
     phi = n
-    devider = 2
+    divider = 2
     to_the_power_of_counter = 0
     list_p_q = []
     list_p_q_to_the_power_of = []
 
     while True:
-        answer = phi / devider
+        answer = phi / divider
         if answer == 1 or phi == 1:
             return 1
-        if is_prime(devider):
+        if is_prime(divider):
             to_the_power_of_counter += 1
             if answer % 1 == 0:  # If answer is an integer.
                 phi = answer
                 if is_prime(answer):
-                    if answer == devider:
+                    if answer == divider:
                         list_p_q.append(phi)
                         list_p_q_to_the_power_of.append(to_the_power_of_counter)
                         break
 
-                    list_p_q.append(devider)
+                    list_p_q.append(divider)
                     list_p_q_to_the_power_of.append(to_the_power_of_counter)
                     list_p_q.append(answer)
                     list_p_q_to_the_power_of.append(to_the_power_of_counter)
                     break
 
             elif is_prime(phi):  # Rule: n is prime number
-                list_p_q.append(devider)
+                list_p_q.append(divider)
                 list_p_q_to_the_power_of.append(to_the_power_of_counter)
                 list_p_q.append(phi)
                 list_p_q_to_the_power_of.append(to_the_power_of_counter)
@@ -282,12 +282,12 @@ def prime_factorization(n):
                 break
 
             else:
-                devider += 1
+                divider += 1
                 if to_the_power_of_counter != 0:
                     list_p_q_to_the_power_of.append(to_the_power_of_counter)
                 to_the_power_of_counter = 0
         else:
-            devider += 1
+            divider += 1
     return [list_p_q], [list_p_q_to_the_power_of]
 
 
