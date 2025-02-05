@@ -39,29 +39,14 @@ Question 2:
 How many numbers from 1 to n should be tested before
 deciding if n is prime or not? Why?
 
-Answer 2 alt 2:
-You only need to test numbers from 2 to the square root of (n), inclusive (n).
-A prime number has no divisor other than 1 and itself.
-Therefore:
-If n is divisible by a, then n = a*b, where a and b are factors of n.
-If a is greater than the square root of n, then b must be less than sqrt(n)
-This means that all factors (if they exist) are either less than or equal
-to the sqrt(n) or paired with another factor greater than sqrt(n).
-In short:
-Numbers <= 1 are not prime.
-2 is a prime number.
-Even numbers greater than 2 are not prime.
-
-Answer 2 alt 3:
-Julia och Fredrik:
-
-If a number n has a divisor greater than sqrt(n), the other divisor must
-be smaller than sqrt(n), so we only need to check up to sqrt(n).
-A prime number has exactly two positive divisors: 1 and itself.
+If a number n has a divisor greater than or equal to sqrt(n), the
+other divisor must be smaller than or equal to sqrt(n), so we only
+need to check up to sqrt(n). A prime number has exactly two positive
+divisors: 1 and itself.
 
 ex. sqrt(28) ≈ 5.3
 If any number between 2 and sqrt(28) divides 28 exactly, then 28 is not a prime.
-28/2 = 14, 28/4 = 7 - There are integers, therefore 28 is not a primenumber.
+28/2 = 14, 28/4 = 7 - There are integers, therefore 28 is not a prime number.
 
 
 Question 3:
