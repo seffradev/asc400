@@ -6,7 +6,6 @@ import pytest
 from lab1 import (
     is_prime,
     gcd,
-    modular_inverse,
     euler_phi,
     eea,
     task_3,
@@ -35,25 +34,6 @@ def test_is_prime():
     assert not is_prime(9.1)
     assert not is_prime(5.1)
     assert not is_prime(2.1)
-
-
-def test_modular_inverse():
-    """
-    Task 2 alt 1
-    Test modular inverse alt 1 function.
-    """
-    assert modular_inverse(3, 20) == 7
-    assert modular_inverse(3, 11) == 4
-    assert modular_inverse(7, 40) == 23
-    assert modular_inverse(3, 11) == 4
-    assert modular_inverse(9, 26) == 3
-    assert modular_inverse(15, 28) == 15
-    assert modular_inverse(12, 31) == 13
-    assert modular_inverse(35, 64) == 11
-    assert modular_inverse(10, 17) == 12
-    assert modular_inverse(17, 3120) == 2753
-    with pytest.raises(ValueError):
-        modular_inverse(5, 15)
 
 
 def test_gcd():

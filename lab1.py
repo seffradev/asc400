@@ -98,7 +98,7 @@ https://www.khanacademy.org/computing/computer-science/cryptography/modarithmeti
 """
 
 
-# Task 1:
+# Task 1
 def is_prime(n):
     """Check if a given number is prime."""
     if not isinstance(n, int):
@@ -119,37 +119,7 @@ def is_prime(n):
     return True
 
 
-# Task 2 alt 1
-def modular_inverse(a, b):
-    """Compute the modular inverse of a modulo b using the extended Euclidean algorithm."""
-    if a == 1:
-        return 1
-    quotient = []
-    remainders = [a, b]
-    new_a = a
-    new_b = b
-
-    while remainders[-1] != 0:
-        quotient.append(new_b // new_a)
-        remainders.append(new_b % new_a)
-        new_b = new_a
-        new_a = remainders[-1]
-
-    if remainders[-2] != 1:
-        raise ValueError(f"{a} and {b} are not relatively prime")
-
-    x_list = [0]
-    y_list = [1]
-    for item in reversed(quotient):
-        x = y_list[-1] - item * x_list[-1]
-        y = x_list[-1]
-        x_list.append(x)
-        y_list.append(y)
-
-    return x_list[-1] % b
-
-
-# Task 2 alt 2
+# Task 2
 def eea(e, n):
     """Extended Euclidean algorithm
 
@@ -177,7 +147,7 @@ def eea(e, n):
 
 
 def gcd(e, n):
-    """Find gcd"""
+    """Find greatest common divisor"""
     if e == 0:
         return n
     if n == 0:
@@ -217,27 +187,6 @@ def gcd(e, n):
     return max(list_gcd)
 
 
-# Task 3 alt 1
-def task_3_gcd(a, b):
-    """
-    GCD
-    lab1.py:218:0: R1710: Either all return statements in
-    a function should return an expression, or none of them should.
-    (inconsistent-return-statements)
-    """
-    rester = [a, b]
-    new_a = a
-    new_b = b
-
-    while rester[-1] != 0:
-        rester.append(new_b % new_a)
-        new_b = new_a
-        new_a = rester[-1]
-
-    if rester[-2] == 1:
-        return 1
-
-
 def task_3(n):
     """Euler phi
     with pytest.raises(ValueError):
@@ -247,7 +196,7 @@ def task_3(n):
         return ValueError("Incorrect n value, n must be 1 or more")
     antal_positiva_tal = 1
     for i in range(2, n):
-        if task_3_gcd(i, n) == 1:
+        if gcd(i, n) == 1:
             antal_positiva_tal += 1
     return antal_positiva_tal
 
@@ -350,7 +299,7 @@ def public_to_private_key_alt_1(e, n):
     d = e**-1 mod Ф (N)
     """
     modulus_n = task_3(n)
-    inverse_e = modular_inverse(e, modulus_n)
+    inverse_e = eea(e, modulus_n)
     d = inverse_e % modulus_n
     return d
 
