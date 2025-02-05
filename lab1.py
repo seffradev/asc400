@@ -70,8 +70,8 @@ c = 15**(1+2+16) mod 77
 
 15**1 mod 77 = 15
 
-15**2 mod 77 = 
-(15 * 15) mod 77 = 
+15**2 mod 77 =
+(15 * 15) mod 77 =
 225 mod 77 = 71
 
 15**4 mod 77 =
@@ -152,13 +152,13 @@ def modular_inverse(a, b):
 # Task 2 alt 2
 def eea(e, n):
     """Extended Euclidean algorithm
-    
+
     Refer to Lab1_ RSA toolbox.pdf, page 9.
     According to the reference, the greatest common divisor (GCD)
     must be calculated to find the modular inverse of e modulo N.
 
     GCD (e, Ф (N)) = 1
-    inverse (i) = inverse (i-2) - (inverse (i-1) * quotient (i-1)) 
+    inverse (i) = inverse (i-2) - (inverse (i-1) * quotient (i-1))
     """
 
     if gcd(e, n) != 1:
@@ -179,7 +179,7 @@ def eea(e, n):
 
 
 def gcd(e, n):
-    """"Find gcd"""
+    """Find gcd"""
     if e == 0:
         return n
     if n == 0:
@@ -247,10 +247,10 @@ def task_3(n):
     """
     if n <= 0:
         return ValueError("Incorrect n value, n must be 1 or more")
-    antal_positiva_tal= 1
+    antal_positiva_tal = 1
     for i in range(2, n):
-        if task_3_gcd(i,n) == 1:
-            antal_positiva_tal +=1
+        if task_3_gcd(i, n) == 1:
+            antal_positiva_tal += 1
     return antal_positiva_tal
 
 
@@ -275,14 +275,17 @@ def euler_phi(n):
     result_list = []
     result = 0
 
-    if len(list_p_q) == 1: # Rule: General formula
+    if len(list_p_q) == 1:  # Rule: General formula
         result = int(n * (1 - (1 / list_p_q[0])))
-    elif list_p_q_to_the_power_of[-2:] == [1, 1]: # Rule: n=p×q, two different prime numbers
+    elif list_p_q_to_the_power_of[-2:] == [
+        1,
+        1,
+    ]:  # Rule: n=p×q, two different prime numbers
         for pq in list_p_q:
             answer = pq - 1
             result_list.append(answer)
         result = result_list[-2] * result_list[-1]
-    else: # Rule: n = p**k, prime number to the power of k
+    else:  # Rule: n = p**k, prime number to the power of k
         result = int(n * (1 - (1 / list_p_q[-2])) * (1 - (1 / list_p_q[-1])))
 
     return result
@@ -309,7 +312,7 @@ def prime_factorization(n):
             return 1
         if is_prime(devider):
             to_the_power_of_counter += 1
-            if answer % 1 == 0: # If answer is an integer.
+            if answer % 1 == 0:  # If answer is an integer.
                 phi = answer
                 if is_prime(answer):
                     if answer == devider:
@@ -323,7 +326,7 @@ def prime_factorization(n):
                     list_p_q_to_the_power_of.append(to_the_power_of_counter)
                     break
 
-            elif is_prime(phi): # Rule: n is prime number
+            elif is_prime(phi):  # Rule: n is prime number
                 list_p_q.append(devider)
                 list_p_q_to_the_power_of.append(to_the_power_of_counter)
                 list_p_q.append(phi)
@@ -342,8 +345,8 @@ def prime_factorization(n):
 
 
 # Task 4, alt 1
-def public_to_private_key_alt_1(e,n):
-    """ Find secret key (d, n) from public key (e, n). 
+def public_to_private_key_alt_1(e, n):
+    """Find secret key (d, n) from public key (e, n).
 
     Refer to Lab 1_RSA Toolbox_lab manual.pdf, page 5.
     d = e**-1 mod Ф (N)
@@ -356,7 +359,7 @@ def public_to_private_key_alt_1(e,n):
 
 # Task 4, alt 2
 def public_to_private_key(e, n):
-    """ Find secret key (d, n) from public key (e, n).
+    """Find secret key (d, n) from public key (e, n).
 
     Refer to Lab 1_RSA Toolbox_lab manual.pdf, page 5.
     d = e**-1 mod Ф (N)
