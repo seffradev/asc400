@@ -191,6 +191,7 @@ def gcd(e, n):
 
     while True:
         result = abs(e) / divider_e
+        # Check if the float returned is actually an integer
         if result % 1 == 0:
             list_e.append(int(result))
         divider_e += 1
@@ -199,6 +200,7 @@ def gcd(e, n):
 
     while True:
         result = abs(n) / divider_n
+        # Check if the float returned is actually an integer
         if result % 1 == 0:
             list_n.append(int(result))
         divider_n += 1
