@@ -147,45 +147,11 @@ def eea(e, n):
     return inverse[-2] % n
 
 
-def gcd(e, n):
+def gcd(a, b):
     """Find greatest common divisor"""
-    if e == 0:
-        return n
-    if n == 0:
-        return e
-
-    list_e = []
-    list_n = []
-
-    divider_e = 1
-    divider_n = 1
-
-    while True:
-        result = abs(e) / divider_e
-        # Check if the float returned is actually an integer
-        if result % 1 == 0:
-            list_e.append(int(result))
-        divider_e += 1
-        if divider_e > abs(e):
-            break
-
-    while True:
-        result = abs(n) / divider_n
-        # Check if the float returned is actually an integer
-        if result % 1 == 0:
-            list_n.append(int(result))
-        divider_n += 1
-        if divider_n > abs(n):
-            break
-
-    list_gcd = []
-
-    for number_e in list_e:
-        for number_n in list_n:
-            if number_e == number_n:
-                list_gcd.append(number_e)
-
-    return max(list_gcd)
+    while b:
+        a, b = b, a % b
+    return a
 
 
 # Task 3
