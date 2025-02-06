@@ -47,7 +47,7 @@ divisors: 1 and itself.
 
 ex. sqrt(28) ≈ 5.3
 If any number between 2 and sqrt(28) divides 28 exactly, then 28 is not a prime.
-28/2 = 14, 28/4 = 7 - There are integers, therefore 28 is not a prime number.
+28/2 = 14, 28/4 = 7 - They are integers, therefore 28 is not a prime number.
 
 
 Question 3:
@@ -188,132 +188,26 @@ def gcd(e, n):
     return max(list_gcd)
 
 
-# Task 3 alt 1
-def task_3(n):
-    """Euler phi
-    with pytest.raises(ValueError):
-        task_3(0)
-    """
+# Task 3
+def phi(n):
+    """Euler phi"""
     if n <= 0:
-        return ValueError("Incorrect n value, n must be 1 or more")
-    antal_positiva_tal = 1
+        raise ValueError("Incorrect n value, n must be 1 or greater")
+    coprimes = 1
     for i in range(2, n):
         if gcd(i, n) == 1:
-            antal_positiva_tal += 1
-    return antal_positiva_tal
+            coprimes += 1
+    return coprimes
 
 
-# Task 3 alt 2
-def euler_phi(n):
-    """Euler phi function
-    Refer to Lab1_ RSA toolbox.pdf, page 4.
-    "Find its prime factors and find the greatest common one"
-
-    Refer to https://www.geeksforgeeks.org/eulers-totient-function/
-    "If n is a prime number"
-    "If n is a power of a prime p**k"
-    "Multiplicative Property"
-    "General formula"
-    """
-    if n <= 0:
-        return 0
-    if prime_factorization(n) == 1:
-        return 1
-    [list_p_q], [list_p_q_to_the_power_of] = prime_factorization(n)
-
-    result_list = []
-    result = 0
-
-    if len(list_p_q) == 1:  # Rule: General formula
-        result = int(n * (1 - (1 / list_p_q[0])))
-    elif list_p_q_to_the_power_of[-2:] == [
-        1,
-        1,
-    ]:  # Rule: n=p×q, two different prime numbers
-        for pq in list_p_q:
-            answer = pq - 1
-            result_list.append(answer)
-        result = result_list[-2] * result_list[-1]
-    else:  # Rule: n = p**k, prime number to the power of k
-        result = int(n * (1 - (1 / list_p_q[-2])) * (1 - (1 / list_p_q[-1])))
-
-    return result
-
-
-def prime_factorization(n):
-    """Prime factorization
-    Take the number and divide it by the smallest prime, 2.
-    Check if the result is an integer and whether it is prime.
-    If it is not an integer, divide the original number by the next prime.
-    If it is an integer but not a prime, continue dividing by 2.
-    When a prime factor is found, add it to the list along with the count
-    of divisions to represent its exponent.
-    """
-    phi = n
-    divider = 2
-    to_the_power_of_counter = 0
-    list_p_q = []
-    list_p_q_to_the_power_of = []
-
-    while True:
-        answer = phi / divider
-        if answer == 1 or phi == 1:
-            return 1
-        if is_prime(divider):
-            to_the_power_of_counter += 1
-            if answer % 1 == 0:  # If answer is an integer.
-                phi = answer
-                if is_prime(answer):
-                    if answer == divider:
-                        list_p_q.append(phi)
-                        list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                        break
-
-                    list_p_q.append(divider)
-                    list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                    list_p_q.append(answer)
-                    list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                    break
-
-            elif is_prime(phi):  # Rule: n is prime number
-                list_p_q.append(divider)
-                list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                list_p_q.append(phi)
-                list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                to_the_power_of_counter = 0
-                break
-
-            else:
-                divider += 1
-                if to_the_power_of_counter != 0:
-                    list_p_q_to_the_power_of.append(to_the_power_of_counter)
-                to_the_power_of_counter = 0
-        else:
-            divider += 1
-    return [list_p_q], [list_p_q_to_the_power_of]
-
-
-# Task 4, alt 1
-def public_to_private_key_alt_1(e, n):
+# Task 4
+def modular_inverse(e, n):
     """Find secret key (d, n) from public key (e, n).
 
     Refer to Lab 1_RSA Toolbox_lab manual.pdf, page 5.
     d = e**-1 mod Ф (N)
     """
-    modulus_n = task_3(n)
-    inverse_e = eea(e, modulus_n)
-    d = inverse_e % modulus_n
-    return d
-
-
-# Task 4, alt 2
-def public_to_private_key(e, n):
-    """Find secret key (d, n) from public key (e, n).
-
-    Refer to Lab 1_RSA Toolbox_lab manual.pdf, page 5.
-    d = e**-1 mod Ф (N)
-    """
-    modulus_n = euler_phi(n)
+    modulus_n = phi(n)
     inverse_e = eea(e, modulus_n)
     d = inverse_e % modulus_n
     return d
