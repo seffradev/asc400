@@ -39,6 +39,7 @@ Question 2:
 How many numbers from 1 to n should be tested before
 deciding if n is prime or not? Why?
 
+Answer 2:
 If a number n has a divisor greater than or equal to sqrt(n), the
 other divisor must be smaller than or equal to sqrt(n), so we only
 need to check up to sqrt(n). A prime number has exactly two positive
