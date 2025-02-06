@@ -237,8 +237,6 @@ def get_action():
             action = "exit"
     except ValueError:
         print("You should enter an integer")
-    except Exception:
-        pass
 
     return action
 
@@ -255,18 +253,33 @@ def main():
         if action == "exit":
             running = False
         elif action == "is_prime":
-            # TODO: Input validation
-            number = int(input("Enter a number to see if it's prime: "))
-            print(number, "is" if is_prime(number) else "is not", "prime")
+            try:
+                number = int(input("Enter a number to see if it's prime: "))
+                print(number, "is" if is_prime(number) else "is not", "prime")
+            except ValueError as e:
+                print(e)
         elif action == "eea":
-            # TODO: Input validation
-            e = int(input("Enter e: "))
-            n = int(input("Enter n: "))
-            print(eea(e, n))
+            try:
+                e = int(input("Enter e: "))
+                n = int(input("Enter n: "))
+                print(eea(e, n))
+            except ValueError:
+                print(e)
         elif action == "phi":
-            number = input("Enter a number to see if it's prime")
+            try:
+                number = int(
+                    input("Enter a number to calculate Euler's totient function on: ")
+                )
+                print(phi(number))
+            except ValueError as e:
+                print(e)
         elif action == "inverse":
-            number = input("Enter a number to see if it's prime")
+            try:
+                e = int(input("Enter e: "))
+                n = int(input("Enter n: "))
+                print(modular_inverse(e, n))
+            except ValueError as e:
+                print(e)
 
 
 if __name__ == "__main__":
